@@ -1,0 +1,4 @@
+train_txt = /home/cunjian/code/caffe/examples/caffe_landmark-master/dataset/train/trainImagelist.txt
+valid_txt = /home/cunjian/code/caffe/examples/caffe_landmark-master/dataset/train/testImagelist.txt
+test_file = /home/cunjian/code/caffe/examples/caffe_landmark-master/dataset/test/bioid_1471_bbox.txt
+test_dir_out = /home/cunjian/code/caffe/examples/caffe_landmark-master/evaluate/test_out_001
