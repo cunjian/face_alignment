@@ -40,10 +40,65 @@ def drawLandmark(img, bbox, landmark):
 	Output:
 	- img marked with landmark and bbox
 	'''
+        img_=img.copy()
+	cv2.rectangle(img_, (bbox.left, bbox.top), (bbox.right, bbox.bottom), (0,0,255), 2)
+	for x, y in landmark:
+		cv2.circle(img_, (int(x), int(y)), 3, (0,255,0), -1)
+	return img_
+
+def drawLandmark_multiple(img, bbox, landmark):
+	'''
+	Input:
+	- img: gray or RGB
+	- bbox: type of BBox
+	- landmark: reproject landmark of (5L, 2L)
+	Output:
+	- img marked with landmark and bbox
+	'''
 	cv2.rectangle(img, (bbox.left, bbox.top), (bbox.right, bbox.bottom), (0,0,255), 2)
 	for x, y in landmark:
 		cv2.circle(img, (int(x), int(y)), 3, (0,255,0), -1)
 	return img
+
+def drawLandmark_Attribute(img, bbox, landmark,gender,age):
+	'''
+	Input:
+	- img: gray or RGB
+	- bbox: type of BBox
+	- landmark: reproject landmark of (5L, 2L)
+	Output:
+	- img marked with landmark and bbox
+	'''
+	cv2.rectangle(img, (bbox.left, bbox.top), (bbox.right, bbox.bottom), (0,0,255), 2)
+	for x, y in landmark:
+		cv2.circle(img, (int(x), int(y)), 3, (0,255,0), -1)
+        if gender.argmax()==0:
+                # -1->female, 1->male; -1->old, 1->young
+                cv2.putText(img, 'female', (int(bbox.left), int(bbox.top)),cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 3)
+        else:
+                cv2.putText(img, 'male', (int(bbox.left), int(bbox.top)),cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0),3)
+        if age.argmax()==0:
+                cv2.putText(img, 'old', (int(bbox.right), int(bbox.bottom)),cv2.FONT_HERSHEY_SIMPLEX, 1,(255, 255, 0), 3)
+        else:
+                cv2.putText(img, 'young', (int(bbox.right), int(bbox.bottom)),cv2.FONT_HERSHEY_SIMPLEX, 1,(255, 255, 0), 3)
+	return img
+
+
+def drawLandmark_only(img, landmark):
+	'''
+	Input:
+	- img: gray or RGB
+	- bbox: type of BBox
+	- landmark: reproject landmark of (5L, 2L)
+	Output:
+	- img marked with landmark and bbox
+	'''
+        img_=img.copy()
+	#cv2.rectangle(img_, (bbox.left, bbox.top), (bbox.right, bbox.bottom), (0,0,255), 2)
+	for x, y in landmark:
+		cv2.circle(img_, (int(x), int(y)), 3, (0,255,0), -1)
+	return img_
+
 
 def processImage(imgs):
 	'''
@@ -64,9 +119,27 @@ def flip(face, landmark):
 	landmark_flip = np.asarray(np.zeros(landmark.shape))
 	for i, point in enumerate(landmark):
 		landmark_flip[i] = (1-point[0], point[1])
-	landmark_flip[[0,1]] = landmark_flip[[1,0]]
-	landmark_flip[[3,4]] = landmark_flip[[4,3]]
+	# for 5-point flip
+        #landmark_flip[[0,1]] = landmark_flip[[1,0]]
+	#landmark_flip[[3,4]] = landmark_flip[[4,3]]
+	# for 19-point flip
+        landmark_flip[[0,9]] = landmark_flip[[9,0]]
+	landmark_flip[[1,8]] = landmark_flip[[8,1]]
+	landmark_flip[[2,7]] = landmark_flip[[7,2]]
+	landmark_flip[[3,6]] = landmark_flip[[6,3]]
+	landmark_flip[[4,11]] = landmark_flip[[11,4]]
+	landmark_flip[[5,10]] = landmark_flip[[10,5]]
+	landmark_flip[[12,14]] = landmark_flip[[14,12]]
+	landmark_flip[[15,17]] = landmark_flip[[17,15]]
 	return (face_, landmark_flip)
+
+def scale(landmark):
+	'''
+	scale the landmark from [0,1] to [-1,1]
+	'''
+        landmark_ = np.asarray(np.zeros(landmark.shape))
+        lanmark_=(landmark-0.5)*2
+	return landmark_
 
 def check_bbox(img, bbox):
 	'''

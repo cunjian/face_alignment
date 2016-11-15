@@ -13,25 +13,15 @@ For data augmentation, I use both rotation and bounding box perturbation. After 
 For network, I choose Vanilla CNN as the building block. The input size is 40*40 and the landmark positions has been scaled to [0,1]. 
 
 
-# To generate dataset from 300W
-cd dataset/300w
-
-python create_raw_300W_equal_bbox_train.py
-
-python create_raw_300W_equal_bbox_test.py
-
-Use ratio=0, if you want to have a tight bounding box
-Use ratio>0, if you want to enlarge the bounding box
 
 # For prediction
-cd evaluate
 
-python predict_vanilla.py ../train_300w_68_vanilla/model/_iter_370000.caffemodel
+python predict_vanilla_fd_one.py Model_68Point/_iter_1400000.caffemodel 314.jpg
 
-# For training
-cd train_300w_68_vanilla
-bash train.sh
 
 # Evaluation Results
+
+Inline-style: 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 
