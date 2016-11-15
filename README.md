@@ -22,9 +22,9 @@ python predict_vanilla_fd_one.py Model_68Point/_iter_1400000.caffemodel 314.jpg
 # Evaluation Results
 
 
-!(https://github.com/cunjian/face_alignment/blob/master/demo_result.jpg "Logo Title Text 1")
+![alt text](https://github.com/cunjian/face_alignment/blob/master/demo_result.jpg "Logo Title Text 1")
 
 
-!(https://github.com/cunjian/face_alignment/blob/master/demo_result_18.jpg "Logo Title Text 1")
+![alt text](https://github.com/cunjian/face_alignment/blob/master/demo_result_18.jpg "Logo Title Text 1")
 
 Images are either taken from the face landmark evaluation dataset or from the Internet. Copyright belongs to the owners.
