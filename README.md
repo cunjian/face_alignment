@@ -22,6 +22,6 @@ python predict_vanilla_fd_one.py Model_68Point/_iter_1400000.caffemodel 314.jpg
 # Evaluation Results
 
 Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/cunjian/face_alignment/blob/master/demo_result.jpg "Logo Title Text 1")
 
 
