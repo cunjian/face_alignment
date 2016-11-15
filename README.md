@@ -10,7 +10,7 @@ The success of landmark detection mainly relies on two aspects: (a) Data Augment
 
 For data augmentation, I use both rotation and bounding box perturbation. After data augmentation, there is a total of 30,301 samples and 5,878 samples for training and validation sets, respectively.
 
-For network, I choose Vanilla CNN as the building block. The input size is 40*40 and the landmark positions has been scaled to [0,1]. 
+For network, I choose Vanilla CNN as the building block. The input size is 40*40 and the landmark positions has been scaled to [0,1]. For face detection, I use DLIB library. Please install caffe and dlib ahead before playing with this model.
 
 
 
