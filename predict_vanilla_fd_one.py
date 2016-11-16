@@ -39,7 +39,7 @@ def load_test_img(gray, bbox):
 if __name__ == '__main__':
 
 
-	net = Predict('Model_68Point/deploy.prototxt', sys.argv[1])
+	net = Predict('../train_300w_68_vanilla/deploy.prototxt', sys.argv[1])
 
         # cascade file
         hc = cv2.CascadeClassifier("haarcascades/xml/haarcascade_frontalface_alt2.xml")
@@ -78,7 +78,7 @@ if __name__ == '__main__':
             new_bbox = map(int, [x_new, x_new+w_new, y_new, y_new+h_new])
             new_bbox = BBox(new_bbox)
             #print bbox_left,bbox_top,bbox_right,bbox_bottom
-            if not check_bbox(gray, new_bbox): 
+            if not check_bbox(gray.transpose(), new_bbox): 
                 print 'BBox out of range.'
                 continue
             face = load_test_img(gray, new_bbox)
