@@ -10,7 +10,6 @@ from configobj import ConfigObj
 import sys
 sys.path.append("..")
 from common.utils import BBox, drawLandmark,drawLandmark_multiple, check_bbox, processImage,scale
-from common.get_data import getDataFromTXT_68_scale,getDataFromTXT_15_scale, load_celeba_data, get_train_val_test_list
 
 class Predict(object):
 	def __init__(self, net, model):
