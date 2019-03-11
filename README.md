@@ -10,7 +10,7 @@ For network, I choose Vanilla CNN as the building block. The input size is 40*40
 
 ### Training:
 
-1. Download the 300W dataset and run create_raw_300W_equal_bbox_train.py to obtain the annotation
+1. Download the 300W dataset and run create_raw_300W_equal_bbox_train.py to obtain the annotation.
 
 2. Prepare the dataset using generate_h5_300w_scale_V4.py; This performs data augmentation and generates the input for the Caffe. 
 
