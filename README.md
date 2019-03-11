@@ -1,15 +1,22 @@
 ### Introduction
 
-This is the implementation of face landmark detection on 300-W dataset using caffe. 
+This is the implementation of face landmark detection on 300-W dataset using Caffe. 
 
-The success of landmark detection mainly relies on two aspects: (a) Data Augmentation and (B) Network. Differing than the above implementations, I focus on the 68 point landmark annotation, which is more challenging than 5 point landmark annotation. This experiment is purely trained on the 300W dataset itself, without using any external dataset. For face detection, I use DLIB library. Please install caffe and dlib ahead before playing with this model. 
+It performs the face alignment with 68-point annotation, which is more challenging than 5-point landmark annotation. It is purely trained on the 300W dataset, without using any external dataset. For face detection, DLIB library is used. Please install Caffe and DLIB ahead before playing with this model. 
 
-For data augmentation, I use both rotation and bounding box perturbation. After data augmentation, there is a total of 30,301 samples and 5,878 samples for training and validation sets, respectively.
+For data augmentation, both rotation and bounding box perturbation are added. Samples outside of the bounaries have been removed. The current implementation supporst HDF5, which requires the loaded h5 file to be less than 2G. It can be splitted into several smaller files if the size exceeds the limit. 
 
-For network, I choose Vanilla CNN as the building block. The input size is 40*40 and the landmark positions has been scaled to [0,1]. 
+For network, I choose Vanilla CNN as the building block. The input size is 40*40 and the landmark positions has been scaled to [0,1]. You can replace the backbone network with more advanced network structure. 
 
+### Training:
 
-### For prediction
+1. Download the 300W dataset and run create_raw_300W_equal_bbox_train.py to obtain the annotation
+
+2. Prepare the dataset using generate_h5_300w_scale_V4.py; This performs data augmentation and generates the input for the Caffe. 
+
+3. Run train.sh
+
+### Prediction
 
 python predict_vanilla_fd_one.py Model_68Point/_iter_1400000.caffemodel 314.jpg
 
